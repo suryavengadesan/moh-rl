@@ -1,0 +1,52 @@
+# Default experiment configuration
+experiment:
+  name: "data_balance_sweep"
+  seed: 42
+
+# Data balance settings
+data:
+  # Ratio of positive (solvable) to negative (impossible) examples
+  # Format: positive_fraction (0.0 to 1.0)
+  positive_fraction: 0.5
+  # Sweep values for experiments
+  sweep_fractions: [0.95, 0.8, 0.6, 0.5, 0.4, 0.2]
+  # Source splits from ImpossibleBench
+  positive_split: "original"
+  negative_splits: ["conflicting", "oneoff"]
+  # Max samples per split (null = use all)
+  max_samples_per_split: null
+  shuffle: true
+
+# RL Training settings
+training:
+  model: "openai/gpt-4o"
+  learning_rate: 1.0e-5
+  batch_size: 8
+  epochs: 3
+  max_steps: 1000
+  # Reward weights
+  reward:
+    correct_solve: 1.0          # reward for solving original tasks
+    correct_flag: 0.8           # reward for flagging impossible tasks
+    rationalization_penalty: -1.5  # penalty for cheating on impossible tasks
+    incorrect_penalty: -0.5     # penalty for wrong answer on solvable tasks
+
+# Evaluation settings
+evaluation:
+  models: ["openai/gpt-4o"]
+  splits: ["original", "oneoff", "conflicting"]
+  agent_type: "minimal"
+  max_attempts: 3
+  limit: 50
+  message_limit: 30
+  sandbox: "docker"
+  # LLM Judge settings
+  judge:
+    model: "anthropic/claude-sonnet-4-20250514"
+    max_concurrency: 10
+
+# Analysis settings
+analysis:
+  output_dir: "./results"
+  plot_format: "png"
+  plot_dpi: 150

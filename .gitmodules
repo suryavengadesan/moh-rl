@@ -1,0 +1,6 @@
+[submodule "rl-rewardhacking"]
+	path = rl-rewardhacking
+	url = https://github.com/ariahw/rl-rewardhacking.git
+[submodule "impossiblebench"]
+	path = impossiblebench
+	url = https://github.com/safety-research/impossiblebench

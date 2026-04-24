@@ -1,0 +1,11 @@
+pyyaml>=6.0
+numpy>=1.24
+pandas>=2.0
+matplotlib>=3.7
+seaborn>=0.12
+datasets>=2.14
+torch>=2.0
+tqdm>=4.65
+inspect-ai>=0.3
+litellm>=1.0
+anthropic>=0.25
